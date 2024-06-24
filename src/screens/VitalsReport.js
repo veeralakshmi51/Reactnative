@@ -69,6 +69,11 @@ const VitalsReport = () => {
             },
           ],
         };
+
+        // case 'perHour':
+        //   return{
+        //     labels:['6.15 AM','6.30 AM','6.45 AM','7 AM','7.15 AM','7.30 AM','7.45 AM','8 AM','8.15 AM','8.30 AM','8.45 AM','9 AM']
+        //   }
       default: {
         return {
           labels: [],

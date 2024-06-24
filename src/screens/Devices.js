@@ -5,6 +5,7 @@ const icon = require('../images/plus.png');
 const Devices = ({navigation}) => {
   const addDevice = () => {
     console.log('Device Added');
+    navigation.navigate('BluetoothManager');
   };
   return (
     <View style={{flex: 1, backgroundColor: 'black'}}>

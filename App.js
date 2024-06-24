@@ -44,8 +44,8 @@ const App = () => {
     //     }
     //   ]}
     // />
-    // <AppNavigator/>
-    <BluetoothManager/>
+    <AppNavigator/>
+    // <BluetoothManager/>
   );
 };
 
