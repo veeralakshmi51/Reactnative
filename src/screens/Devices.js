@@ -5,7 +5,6 @@ const icon = require('../images/plus.png');
 const Devices = ({navigation}) => {
   const addDevice = () => {
     console.log('Device Added');
-    navigation.navigate('AddDevice');
   };
   return (
     <View style={{flex: 1, backgroundColor: 'black'}}>

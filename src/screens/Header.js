@@ -21,7 +21,6 @@ const Header = ({title, icon, navigation}) => {
   };
   const addDevice = () => {
     console.log('came');
-    navigation.navigate('AddDevice');
   };
   return (
     <View style={styles.header}>

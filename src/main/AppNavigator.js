@@ -47,7 +47,6 @@ import HeartRate from '../../vitalspages/HeartRate';
 import BloodPressure from '../../vitalspages/BloodPressure';
 import Oxygen from '../../vitalspages/OxygenLevel';
 import Respiration from '../../vitalspages/RespirationLevel';
-import AddDevice from '../screens/AddDevice';
 import Scanner from '../screens/Scanner';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -134,7 +133,6 @@ const AppNavigator = () => {
         <Stack.Screen name="BloodPressure" component={BloodPressure} options={{headerShown:false}}/>
         <Stack.Screen name="OxygenLevel" component={Oxygen} options={{headerShown:false}}/>
         <Stack.Screen name="RespirationLevel" component={Respiration} options={{headerShown:false}}/>
-        <Stack.Screen name='AddDevice' component={AddDevice} />
         <Stack.Screen name='Scanner' component={Scanner} />
       </Stack.Navigator>
     </NavigationContainer>

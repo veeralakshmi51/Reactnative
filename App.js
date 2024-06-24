@@ -1,6 +1,7 @@
 import React from 'react';
 import AppNavigator from './src/main/AppNavigator';
 import 'react-native-gesture-handler';
+import BluetoothManager from './src/screens/BluetoothManager';
 // import LineGraph from './src/screens/LineGraph';
 
 const App = () => {
@@ -43,7 +44,8 @@ const App = () => {
     //     }
     //   ]}
     // />
-    <AppNavigator/>
+    // <AppNavigator/>
+    <BluetoothManager/>
   );
 };
 
