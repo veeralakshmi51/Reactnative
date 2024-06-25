@@ -140,14 +140,13 @@ const BluetoothManager = () => {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <ScrollView>
       <View style={{pdadingHorizontal: 20}}>
         <Text
           style={[
             styles.title,
             {color: isDarkMode ? Colors.white : Colors.black},
           ]}>
-          BlueTooth Manager
+          All Devices
         </Text>
         <TouchableOpacity
           activeOpacity={0.5}
@@ -157,6 +156,7 @@ const BluetoothManager = () => {
             {isScanning ? 'Scanning...' : 'Scan Bluetooth Devices'}
           </Text>
         </TouchableOpacity>
+        <ScrollView>
         <Text
           style={[
             styles.subtitle,
@@ -201,8 +201,8 @@ const BluetoothManager = () => {
         ) : (
           <Text style={styles.noDevicesText}>No connected devices</Text>
         )}
+        </ScrollView>
       </View>
-      </ScrollView>
       
     </SafeAreaView>
   );

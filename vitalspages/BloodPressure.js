@@ -13,7 +13,7 @@ import {Svg, Circle, Rect, Text as SvgText} from 'react-native-svg';
 
 const screenWidth = Dimensions.get('window').width;
 
-const BloodPressure = () => {
+const BloodPressure = ({navigation}) => {
   const [tooltipPos, setTooltipPos] = useState({
     x: 0,
     y: 0,
@@ -66,7 +66,7 @@ const BloodPressure = () => {
 
   return (
     <View style={{flex: 1, backgroundColor: 'black'}}>
-      <Header title="Blood Pressure" icon={require('../src/images/plus.png')} />
+      <Header title="Blood Pressure" icon={require('../src/images/plus.png')} navigation={navigation}/>
       <DateandReport />
       <View style={styles.buttonContainer}>
         <TouchableOpacity

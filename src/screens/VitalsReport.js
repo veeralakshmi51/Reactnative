@@ -7,7 +7,7 @@ import {Svg, Circle, Rect, Text as SvgText} from 'react-native-svg';
 
 const screenWidth = Dimensions.get('window').width;
 
-const VitalsReport = () => {
+const VitalsReport = ({navigation}) => {
   const [tooltip, setTooltip] = useState({
     x: 0,
     y: 0,
@@ -87,7 +87,7 @@ const VitalsReport = () => {
 
   return (
     <View style={styles.container}>
-      <Header icon={require('../images/plus.png')} title="Vitals Report" />
+      <Header icon={require('../images/plus.png')} title="Vitals Report" navigation={navigation}/>
       <DateandReport />
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={() => setReportType('daily')} style={styles.button}>

@@ -135,7 +135,7 @@ const AppNavigator = () => {
         <Stack.Screen name="OxygenLevel" component={Oxygen} options={{headerShown:false}}/>
         <Stack.Screen name="RespirationLevel" component={Respiration} options={{headerShown:false}}/>
         <Stack.Screen name="BluetoothManager" component={BluetoothManager} options={{headerShown:false}}/>
-        <Stack.Screen name='Scanner' component={Scanner} />
+        <Stack.Screen name='Scanner' component={Scanner} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
