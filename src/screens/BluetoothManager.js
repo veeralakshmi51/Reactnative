@@ -17,7 +17,6 @@ import BleManager from 'react-native-ble-manager';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {styles} from '../styles/styles';
 import {DeviceList} from './DeviceList';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { ScrollView } from 'react-native-virtualized-view';
 const BleManagerModule = NativeModules.BleManager;
 const BleManagerEmitter = new NativeEventEmitter(BleManagerModule);
@@ -102,7 +101,6 @@ const BluetoothManager = () => {
         });
     }
   };
-  // pair with device first before connecting to it
   const connectToPeripheral = peripheral => {
     BleManager.createBond(peripheral.id)
       .then(() => {
@@ -116,7 +114,6 @@ const BluetoothManager = () => {
         console.log('failed to bond');
       });
   };
-  // disconnect from device
   const disconnectFromPeripheral = peripheral => {
     BleManager.removeBond(peripheral.id)
       .then(() => {

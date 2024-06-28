@@ -49,6 +49,8 @@ import Oxygen from '../../vitalspages/OxygenLevel';
 import Respiration from '../../vitalspages/RespirationLevel';
 import Scanner from '../screens/Scanner';
 import BluetoothManager from '../screens/BluetoothManager';
+import Register from '../screens/Register';
+import ScannedList from '../screens/ScannedList';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -89,8 +91,16 @@ const HomeTabNavigator = () => {
         component={VitalsReport}
         options={{headerShown: false}}
       />
-      <Tab.Screen name="Device" component={Devices} options={{headerShown:false}}/>
-      <Tab.Screen name="Profile" component={UserProfile} options={{headerShown:false}}/>
+      <Tab.Screen
+        name="Device"
+        component={Devices}
+        options={{headerShown: false}}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={UserProfile}
+        options={{headerShown: false}}
+      />
     </Tab.Navigator>
   );
 };
@@ -130,12 +140,42 @@ const AppNavigator = () => {
           component={Region}
           options={{headerShown: false}}
         />
-        <Stack.Screen name="HeartRate" component={HeartRate} options={{headerShown:false}}/>
-        <Stack.Screen name="BloodPressure" component={BloodPressure} options={{headerShown:false}}/>
-        <Stack.Screen name="OxygenLevel" component={Oxygen} options={{headerShown:false}}/>
-        <Stack.Screen name="RespirationLevel" component={Respiration} options={{headerShown:false}}/>
-        <Stack.Screen name="BluetoothManager" component={BluetoothManager} options={{headerShown:false}}/>
-        <Stack.Screen name='Scanner' component={Scanner} options={{headerShown:false}}/>
+        <Stack.Screen
+          name="HeartRate"
+          component={HeartRate}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="BloodPressure"
+          component={BloodPressure}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="OxygenLevel"
+          component={Oxygen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="RespirationLevel"
+          component={Respiration}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="BluetoothManager"
+          component={BluetoothManager}
+          options={{headerShown: false}}
+        />
+
+        <Stack.Screen
+          name="Scanner"
+          component={Scanner}
+          options={{
+            headerStyle: {backgroundColor: 'black'},
+            headerTintColor: 'white',
+          }}
+        />
+        <Stack.Screen name='Register' component={Register} options={{headerShown:false}}/>
+        <Stack.Screen name='ScannedList' component={ScannedList} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

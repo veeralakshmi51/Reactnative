@@ -1,72 +1,75 @@
-import { View, Text, Alert, Linking, StyleSheet } from 'react-native';
-import React, { useState } from 'react';
+import {View, Text, Alert, Linking, StyleSheet, Dimensions} from 'react-native';
+import React, {useState} from 'react';
 import QRCodeScanner from 'react-native-qrcode-scanner';
-import { RNCamera } from 'react-native-camera';
-import Header from './Header';
+import {RNCamera} from 'react-native-camera';
 
-const Scanner = ({ navigation }) => {
+const Scanner = ({navigation}) => {
   const [scannedData, setScannedData] = useState(null);
 
-  const scan = async (e) => {
+  const scan = async e => {
     try {
       console.log(e);
       const canOpen = await Linking.canOpenURL(e.data);
 
       Alert.alert(
-        "Scanned Data",
+        'Scanned Data',
         e.data,
         [
           {
-            text: "OK",
+            text: 'OK',
             onPress: () => {
               if (canOpen) {
                 Linking.openURL(e.data);
               }
-            }
-          }
+            },
+          },
         ],
-        { cancelable: true }
+        {cancelable: true},
       );
 
       setScannedData(e.data);
+      navigation.navigate('ScannedList')
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: 'black' }}>
-      <Header
-        icon={require('../images/plus.png')}
-        title="QR Scanner"
-        navigation={navigation}
-      />
+    <View style={{flex: 1, backgroundColor: 'black'}}>
       {!scannedData ? (
         <QRCodeScanner
           flashMode={RNCamera.Constants.FlashMode.off}
-          onRead={(e) => scan(e)}
-          cameraProps={{ captureAudio: false }}
+          onRead={e => scan(e)}
+          cameraProps={{captureAudio: false}}
         />
       ) : (
         <View style={styles.scannedDataContainer}>
+        <Text style={{alignSelf:'center',margin:10,fontSize:18,color:'tomato'}}>Scanned Data</Text>
           <Text style={styles.scannedDataText}>{scannedData}</Text>
         </View>
       )}
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   scannedDataContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#1a1a1a',
+    borderWidth:2,
+    borderColor:'white',
+    elevation:5,
+    borderRadius:20,
+    alignContent:'center',
+    margin:'10%',
+    height:350,
+    opacity:1
+    
   },
   scannedDataText: {
-    fontSize: 16,
-    color: 'black',
-    padding: 20,
+    fontSize: 15,
+    color: 'white',
+    margin:20,
+    marginTop:20,
+    
   },
 });
 

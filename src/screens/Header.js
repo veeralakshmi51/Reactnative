@@ -8,7 +8,7 @@ import {
   StatusBar,
   Modal,
 } from 'react-native';
-
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const Header = ({title, icon, navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -21,7 +21,7 @@ const Header = ({title, icon, navigation}) => {
   };
   const addDevice = () => {
     console.log('came');
-    navigation.navigate('BluetoothManager');
+    navigation.navigate('Device');
   };
   return (
     <View style={styles.header}>
@@ -43,12 +43,16 @@ const Header = ({title, icon, navigation}) => {
       </TouchableOpacity>
 
       <Modal
-        animationType="none"
+        animationType="fade"
         transparent={true}
         visible={modalVisible}
-        onRequestClose={closeModal}>
+        onRequestClose={closeModal}
+        >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
+          <TouchableOpacity onPress={closeModal}>
+            <Icon name='close-circle-outline' size={20} color='black' style={{textAlign:'right'}}/>
+          </TouchableOpacity>
             <TouchableOpacity
               style={styles.modalOption}
               onPress={() => {
@@ -56,16 +60,16 @@ const Header = ({title, icon, navigation}) => {
                 addDevice();
                 closeModal();
               }}>
-              <Text style={styles.modalText}>Add Device</Text>
+              <Text style={styles.modalText}>Connect Via Bluetooth</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.modalOption}
               onPress={() => {
                 console.log('Scanner clicked');
-                navigation.navigate('Scanner')
+                navigation.navigate('ScannedList')
                 closeModal();
               }}>
-              <Text style={styles.modalText}>Scanner</Text>
+              <Text style={styles.modalText}>Device List</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.modalOption} onPress={closeModal}>
               <Text style={styles.modalText}>Cancel</Text>
