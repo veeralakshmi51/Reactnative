@@ -13,6 +13,7 @@ import React, {useState} from 'react';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { resetCache } from '../../metro.config';
 
 const validationSchema = Yup.object().shape({
   firstname: Yup.string()
@@ -106,9 +107,10 @@ const Register = ({navigation}) => {
               orgName: '',
             }}
             validationSchema={validationSchema}
-            onSubmit={values => {
+            onSubmit={(values,{resetForm}) => {
               Alert.alert('Registered successgully');
               console.log('FormValues', values);
+              resetForm();//default
             }}>
             {({
               handleChange,

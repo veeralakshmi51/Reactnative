@@ -57,7 +57,7 @@ const ScannedList = ({navigation}) => {
       deviceType: 'DeviceType-7',
       modelType: 'ModelType-7',
       uuid: '35bfd64a-eacc-404a-a2e5-414f2e21d97f',
-      modelNo: '1',
+      modelNo: '7',
     },
     {
       id: 8,

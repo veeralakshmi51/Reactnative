@@ -170,7 +170,7 @@ import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
-const Login = () => {
+const Login = ({navigation}) => {
   const [userInfo, setUserInfo] = useState(null);
   useEffect(() => {
     console.log('it');
@@ -187,6 +187,7 @@ const Login = () => {
       await GoogleSignin.hasPlayServices();
       const user = await GoogleSignin.signIn();
       setUserInfo(user);
+      navigation.navigate('Register');
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         // user cancelled the login flow
