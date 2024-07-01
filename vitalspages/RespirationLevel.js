@@ -34,6 +34,16 @@ const RespirationLevel = ({navigation}) => {
             },
           ],
         };
+        case 'hour':
+        return {
+          labels: ['6.10 AM', '6.20 AM', '6.30 PM', '6.40 PM', '6.50 PM', '7 PM'],
+          datasets: [
+            {
+              data: [12,15,18,16,17,12],
+              strokeWidth: 2,
+            },
+          ],
+        };
       case 'weekly':
         return {
           labels: ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'],
@@ -69,6 +79,11 @@ const RespirationLevel = ({navigation}) => {
       <Header title="Respiration Level" icon={require('../src/images/plus.png')} navigation={navigation}/>
       <DateandReport />
       <View style={styles.buttonContainer}>
+      <TouchableOpacity
+          onPress={() => setReportType('hour')}
+          style={styles.button}>
+          <Text style={styles.buttonText}>Hour</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           onPress={() => setReportType('daily')}
           style={styles.button}>

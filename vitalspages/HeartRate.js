@@ -24,6 +24,16 @@ const HeartRate = ({navigation}) => {
 
   const getData = () => {
     switch (reportType) {
+      case 'hour':
+        return {
+          labels: ['6.10 AM', '6.20 AM', '6.30 PM', '6.40 PM', '6.50 PM', '7 PM'],
+          datasets: [
+            {
+              data: [98,89,97,95,87,91],
+              strokeWidth: 2,
+            },
+          ],
+        };
       case 'daily':
         return {
           labels: ['6 AM', '9 AM', '12 PM', '3 PM', '6 PM', '9 PM'],
@@ -69,6 +79,11 @@ const HeartRate = ({navigation}) => {
       <Header title="Heart Rate" icon={require('../src/images/plus.png')} navigation={navigation}/>
       <DateandReport />
       <View style={styles.buttonContainer}>
+      <TouchableOpacity
+          onPress={() => setReportType('hour')}
+          style={styles.button}>
+          <Text style={styles.buttonText}>Hour</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           onPress={() => setReportType('daily')}
           style={styles.button}>

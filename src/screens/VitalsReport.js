@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {View, Dimensions, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import {
+  View,
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
 import {BarChart} from 'react-native-chart-kit';
 import Header from './Header';
 import DateandReport from '../main/DateandReport';
@@ -70,10 +76,30 @@ const VitalsReport = ({navigation}) => {
           ],
         };
 
-        // case 'perHour':
-        //   return{
-        //     labels:['6.15 AM','6.30 AM','6.45 AM','7 AM','7.15 AM','7.30 AM','7.45 AM','8 AM','8.15 AM','8.30 AM','8.45 AM','9 AM']
-        //   }
+      case 'hour':
+        return {
+          labels: [
+            '6.10 AM',
+            '6.20 AM',
+            '6.30 AM',
+            '6.40 AM',
+            '6.50 AM',
+            '7 AM',
+          ],
+          datasets: [
+            {
+              data: [
+                Math.random() * 100,
+                Math.random() * 100,
+                Math.random() * 100,
+                Math.random() * 100,
+                Math.random() * 100,
+                Math.random() * 100,
+              ],
+              strokeWidth: 2,
+            },
+          ],
+        };
       default: {
         return {
           labels: [],
@@ -87,16 +113,31 @@ const VitalsReport = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Header icon={require('../images/plus.png')} title="Vitals Report" navigation={navigation}/>
+      <Header
+        icon={require('../images/plus.png')}
+        title="Vitals Report"
+        navigation={navigation}
+      />
       <DateandReport />
       <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={() => setReportType('daily')} style={styles.button}>
+        <TouchableOpacity
+          onPress={() => setReportType('hour')}
+          style={styles.button}>
+          <Text style={styles.buttonText}>Hour</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => setReportType('daily')}
+          style={styles.button}>
           <Text style={styles.buttonText}>Daily</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setReportType('weekly')} style={styles.button}>
+        <TouchableOpacity
+          onPress={() => setReportType('weekly')}
+          style={styles.button}>
           <Text style={styles.buttonText}>Weekly</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setReportType('monthly')} style={styles.button}>
+        <TouchableOpacity
+          onPress={() => setReportType('monthly')}
+          style={styles.button}>
           <Text style={styles.buttonText}>Monthly</Text>
         </TouchableOpacity>
       </View>
@@ -133,8 +174,7 @@ const VitalsReport = ({navigation}) => {
                   fill="white"
                   fontSize="15"
                   fontWeight="bold"
-                  textAnchor="middle"
-                >
+                  textAnchor="middle">
                   {tooltip.value.toFixed(2)}
                 </SvgText>
                 <Circle
