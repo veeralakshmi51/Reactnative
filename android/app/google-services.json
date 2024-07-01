@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "829484604334",
+    "project_id": "myvitalsmobileapp",
+    "storage_bucket": "myvitalsmobileapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:829484604334:android:cdb823a64d7c57a060463f",
+        "android_client_info": {
+          "package_name": "com.fitnessapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "829484604334-vru7o7m98dfqu5tbfnhcmvgdjvgc7gte.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fitnessapp",
+            "certificate_hash": "84a5556f453a41f566d6db1caf4af014a10e5ad5"
+          }
+        },
+        {
+          "client_id": "829484604334-a2grdbv4p2evu23j9mi3hcrgpbal053h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-BIevHE2VQA_ASyN1RbWYKb2YlTRxnCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "829484604334-a2grdbv4p2evu23j9mi3hcrgpbal053h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

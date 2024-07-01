@@ -1,99 +1,106 @@
-import {View, Text, Alert, TouchableOpacity} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-  statusCodes,
-} from '@react-native-google-signin/google-signin';
-const Login = ({navigation}) => {
-  const [user, setUser] = useState({});
-  useEffect(() => {
-    GoogleSignin.configure({
-      webClientId: '402165749049-5pb8av6tgjauf6gi827n9vg991vdu25c.apps.googleusercontent.com',
-      offlineAccess: true,
-      forceCodeForRefreshToken: true,
-    });
-    isSignedIn();
-  }, []);
+// import {View, Text, Alert, TouchableOpacity} from 'react-native';
+// import React, {useEffect, useState} from 'react';
+// import {
+//   GoogleSignin,
+//   GoogleSigninButton,
+//   statusCodes,
+// } from '@react-native-google-signin/google-signin';
+// const Login = ({navigation}) => {
+//   const [user, setUser] = useState({});
+//   useEffect(() => {
+//     GoogleSignin.configure({
+//       webClientId:
+//         '829484604334-a2grdbv4p2evu23j9mi3hcrgpbal053h.apps.googleusercontent.com',
+//       offlineAccess: true,
+//       forceCodeForRefreshToken: true,
+//     });
+//     isSignedIn();
+//   }, []);
 
-  const signIn = async () => {
-    try{
-        await GoogleSignin.hasPlayServices();
-        const userInfo=await GoogleSignin.signIn();
-        console.log('user information',userInfo);
-        setUser(userInfo);
-    }
-    catch(error){
-        console.log('error is here',error);
-        if(error.code===statusCodes.SIGN_IN_CANCELLED){
-            console.log('user cancelled the login flow');
-        }
-        else if(error.code===statusCodes.IN_PROGRESS){
-          console.log('signin');
-        } else if(error.code===statusCodes.PLAY_SERVICES_NOT_AVAILABLE){
-            console.log('play service is not available');
-        }
-        else{
-            console.log('some other error happens');
-        }
-    }
-  };
+//   const signIn = async () => {
+//     try {
+//       await GoogleSignin.hasPlayServices();
+//       const userInfo = await GoogleSignin.signIn();
+//       console.log('user information', userInfo);
+//       setUser(userInfo);
+//     } catch (error) {
+//       console.log('error is here', error);
+//       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+//         console.log('user cancelled the login flow');
+//       } else if (error.code === statusCodes.IN_PROGRESS) {
+//         console.log('signin');
+//       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+//         console.log('play service is not available');
+//       } else {
+//         console.log('some other error happens');
+//       }
+//     }
+//   };
 
-  const isSignedIn=async()=>{
-    const isSignedIn=await GoogleSignin.isSignedIn()
-    if(!!isSignedIn){
-        getCurrentUserInfo()
-    }else{
-        console.log('please login');
-    }
-  }
+//   const isSignedIn = async () => {
+//     const isSignedIn = await GoogleSignin.isSignedIn();
+//     if (!!isSignedIn) {
+//       getCurrentUserInfo();
+//     } else {
+//       console.log('please login');
+//     }
+//   };
 
-  const getCurrentUserInfo=async()=>{
-    try{
-        const userInfo=await GoogleSignin.signInSilently();
-        console.log('edit',user);
-        setUser(userInfo);
-    }
-    catch(error){
-        if(error.code===statusCodes.SIGN_IN_REQUIRED){
-            Alert.alert('user has not signed in yet');
-            console.log('user has not signed in yet');
-        } else{
-            console.log('something went wrong');
-        }
-    }
-  }
+//   const getCurrentUserInfo = async () => {
+//     try {
+//       const userInfo = await GoogleSignin.signInSilently();
+//       console.log('edit', user);
+//       setUser(userInfo);
+//     } catch (error) {
+//       if (error.code === statusCodes.SIGN_IN_REQUIRED) {
+//         Alert.alert('user has not signed in yet');
+//         console.log('user has not signed in yet');
+//       } else {
+//         console.log('something went wrong');
+//       }
+//     }
+//   };
 
-  const signOut=async()=>{
-    try{
-        await GoogleSignin.revokeAccess();
-        await GoogleSignin.signOut();
-        setUser({});
-    }
-    catch(error){
-        console.error(error);
-    }
-  }
+//   const signOut = async () => {
+//     try {
+//       await GoogleSignin.revokeAccess();
+//       await GoogleSignin.signOut();
+//       setUser({});
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
 
-  const afterLogin=()=>{
-    console.log('after login');
-    navigation.navigate('Register')
+//   const afterLogin = () => {
+//     console.log('after login');
+//     navigation.navigate('Register');
+//   };
+//   return (
+//     <View style={{flex: 1, margin: 50}}>
+//       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+//         {!user.idToken ? (
+//           <GoogleSigninButton
+//             style={{width: 192, height: 48}}
+//             size={GoogleSigninButton.Size.Wide}
+//             color={GoogleSigninButton.Color.Dark}
+//             onPress={signIn}
+//           />
+//         ) : (
+//           <TouchableOpacity onPress={signOut}>
+//             <Text>Signout</Text>
+//           </TouchableOpacity>
+//         )}
+//         <TouchableOpacity onPress={afterLogin}>
+//           <Text style={{color: 'black', margin: 20}}>
+//             Register after sso authetication
+//           </Text>
+//         </TouchableOpacity>
+//       </View>
+//     </View>
+//   );
+// };
 
-  }
-  return (
-    <View style={{flex:1,margin:50}}>
-    <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-        {!user.idToken?<GoogleSigninButton style={{width:192,height:48}} size={GoogleSigninButton.Size.Wide} color={GoogleSigninButton.Color.Dark} onPress={signIn}/>:<TouchableOpacity onPress={signOut}><Text>Signout</Text></TouchableOpacity>}
-        <TouchableOpacity onPress={afterLogin}>
-          <Text style={{color:'black',margin:20}}>Register after sso authetication</Text>
-        </TouchableOpacity>
-    </View>
-
-    </View>
-  );
-};
-
-export default Login;
+// export default Login;
 
 // import React, { useState } from 'react';
 // import { View, Pressable, Image, Text } from 'react-native';
@@ -157,88 +164,101 @@ export default Login;
 //   );
 // }
 
-// import {View, Text, Image, TouchableOpacity} from 'react-native';
-// import React, {useEffect, useState} from 'react';
-// import {
-//   GoogleSignin,
-//   statusCodes,
-// } from '@react-native-google-signin/google-signin';
-// const Login = () => {
-//   const [userInfo, setUserInfo] = useState(null);
-//   useEffect(() => {
-//     console.log('it');
+import {View, Text, Image, TouchableOpacity} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
+const Login = () => {
+  const [userInfo, setUserInfo] = useState(null);
+  useEffect(() => {
+    console.log('it');
 
-//     GoogleSignin.configure({
-//       webClientId:
-//         '402165749049-5pb8av6tgjauf6gi827n9vg991vdu25c.apps.googleusercontent.com',
-//     });
-//   },[]);
+    GoogleSignin.configure({
+      webClientId:
+        '829484604334-a2grdbv4p2evu23j9mi3hcrgpbal053h.apps.googleusercontent.com',
+    });
+  },[]);
 
-//   const signin = async () => {
-//     try {
-//       console.log('i am');
-//       const user = await GoogleSignin.signIn();
-//       setUserInfo(user);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
+  const signin = async () => {
+    try {
+      console.log('i am');
+      await GoogleSignin.hasPlayServices();
+      const user = await GoogleSignin.signIn();
+      setUserInfo(user);
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+        console.log(statusCodes.SIGN_IN_CANCELLED)
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (e.g. sign in) is in progress already
+        console.log(statusCodes.IN_PROGRESS)
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+        console.log(statusCodes.PLAY_SERVICES_NOT_AVAILABLE)
+      } else {
+        // some other error happened
+        console.log(error)
+      }
+    }
+  };
 
-//   const signout = async () => {
-//     try {
-//       await GoogleSignin.signOut();
-//       setUserInfo(null);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-//   return (
-//     <View
-//       style={{
-//         flex: 1,
-//         justifyContent: 'center',
-//         alignItems: 'center',
-//         backgroundColor: 'black',
-//       }}>
-//       {userInfo !== null && <Text>{userInfo.name}</Text>}
-//       {userInfo !== null && <Text>{userInfo.email}</Text>}
-//       {userInfo !== null && (
-//         <Image
-//           source={{uri: userInfo.photo}}
-//           style={{width: 100, height: 100}}
-//         />
-//       )}
+  const signout = async () => {
+    try {
+      await GoogleSignin.signOut();
+      setUserInfo(null);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'black',
+      }}>
+      {userInfo !== null && <Text style={{color:'white',margin:10,fontSize:20}}>{userInfo.user.name}</Text>}
+      {userInfo !== null && <Text style={{color:'tomato',fontSize:20}}>{userInfo.user.email}</Text>}
+      {userInfo !== null && (
+        <Image
+          source={{uri: userInfo.user.photo}}
+          style={{width: 100, height: 100,borderRadius:50,margin:20,borderColor:'white',borderWidth:1.5}}
+        />
+      )}
 
-//       {userInfo === null ? (
-//         <TouchableOpacity onPress={() => signin()}>
-//           <Text
-//             style={{
-//               padding: 20,
-//               borderWidth: 1,
-//               borderColor: 'grey',
-//               color: 'white',
-//             }}>
-//             Googlesignin
-//           </Text>
-//         </TouchableOpacity>
-//       ) : (
-//         <TouchableOpacity onPress={() => signout()}>
-//           <Text
-//             style={{
-//               padding: 20,
-//               borderWidth: 1,
-//               borderColor: 'grey',
-//               color: 'white',
-//             }}>
-//             Signout
-//           </Text>
-//         </TouchableOpacity>
-//       )}
-//     </View>
-//   );
-// };
+      {userInfo === null ? (
+        <TouchableOpacity onPress={() => signin()}>
+          <Text
+            style={{
+              padding: 20,
+              borderWidth: 1,
+              borderColor: 'grey',
+              color: 'white',
+            }}>
+            Googlesignin
+          </Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity onPress={() => signout()}>
+          <Text
+            style={{
+              padding: 20,
+              borderWidth: 1,
+              borderColor: 'grey',
+              color: 'white',
+            }}>
+            Signout
+          </Text>
+        </TouchableOpacity>
+      )}
+    </View>
+  );
+};
 
-// export default Login;
+export default Login;
 
 // import { View, Text, Button } from 'react-native'
 // import React, { useState } from 'react'
