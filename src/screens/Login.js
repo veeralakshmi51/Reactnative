@@ -164,7 +164,7 @@
 //   );
 // }
 
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity, Alert} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {
   GoogleSignin,
@@ -187,19 +187,17 @@ const Login = ({navigation}) => {
       await GoogleSignin.hasPlayServices();
       const user = await GoogleSignin.signIn();
       setUserInfo(user);
+      console.log('user details',user);
+      Alert.alert(user.user.email,user.user.name);
       navigation.navigate('Register');
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        // user cancelled the login flow
         console.log(statusCodes.SIGN_IN_CANCELLED)
       } else if (error.code === statusCodes.IN_PROGRESS) {
-        // operation (e.g. sign in) is in progress already
         console.log(statusCodes.IN_PROGRESS)
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        // play services not available or outdated
         console.log(statusCodes.PLAY_SERVICES_NOT_AVAILABLE)
       } else {
-        // some other error happened
         console.log(error)
       }
     }

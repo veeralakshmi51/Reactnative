@@ -40,7 +40,7 @@ const BottomTabNavigator = () => {
     <Tab.Screen name={homename} component={HomeScreen}/>
     <Tab.Screen name={reportname} component={VitalsReport}/>
     <Tab.Screen name={devices} component={Devices}/>
-    <Tab.Screen name={userprofile} component={UserProfile}/>
+    <Tab.Screen name={userprofile} component={UserProfile} />
     </Tab.Navigator>
    </NavigationContainer>
   )
