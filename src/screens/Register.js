@@ -13,7 +13,6 @@ import React, {useState} from 'react';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { resetCache } from '../../metro.config';
 
 const validationSchema = Yup.object().shape({
   firstname: Yup.string()
@@ -57,24 +56,25 @@ const Register = ({navigation}) => {
       <StatusBar barStyle="dark-content" backgroundColor="white" />
 
       <View style={{height: 200, backgroundColor: 'white'}}>
-        <Icon
-          name="arrow-back"
-          color="white"
-          style={{
-            marginLeft: 20,
-            top: 20,
-            position: 'absolute',
-            backgroundColor: 'tomato',
-            height: 40,
-            width: 40,
-            paddingHorizontal: 10,
-            paddingVertical: 10,
-            borderTopLeftRadius: 20,
-            borderBottomRightRadius: 20,
-          }}
-          size={20}
-          onPress={goback}
-        />
+        <TouchableOpacity onPress={goback}>
+          <Icon
+            name="arrow-back"
+            color="white"
+            style={{
+              marginLeft: 20,
+              top: 20,
+              position: 'absolute',
+              backgroundColor: 'tomato',
+              height: 40,
+              width: 40,
+              paddingHorizontal: 10,
+              paddingVertical: 10,
+              borderTopLeftRadius: 20,
+              borderBottomRightRadius: 20,
+            }}
+            size={20}
+          />
+        </TouchableOpacity>
         <Image
           source={require('../images/signup.jpg')}
           style={{height: 180, width: 250, alignSelf: 'center'}}
@@ -107,10 +107,10 @@ const Register = ({navigation}) => {
               orgName: '',
             }}
             validationSchema={validationSchema}
-            onSubmit={(values,{resetForm}) => {
+            onSubmit={(values, {resetForm}) => {
               Alert.alert('Registered successgully');
               console.log('FormValues', values);
-              resetForm();//default
+              resetForm(); //default
             }}>
             {({
               handleChange,

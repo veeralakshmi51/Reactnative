@@ -51,6 +51,8 @@ import Scanner from '../screens/Scanner';
 import BluetoothManager from '../screens/BluetoothManager';
 import Register from '../screens/Register';
 import ScannedList from '../screens/ScannedList';
+import ProfileDetails from '../screens/ProfileDetails';
+import { UserProvider } from '../Context/UserContext';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -107,7 +109,8 @@ const HomeTabNavigator = () => {
 
 const AppNavigator = () => {
   return (
-    <NavigationContainer>
+    <UserProvider>
+      <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
           name="Splash"
@@ -176,8 +179,10 @@ const AppNavigator = () => {
         />
         <Stack.Screen name='Register' component={Register} options={{headerShown:false}}/>
         <Stack.Screen name='ScannedList' component={ScannedList} options={{headerShown:false}}/>
+        <Stack.Screen name='ProfileDetails' component={ProfileDetails} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
+    </UserProvider>
   );
 };
 

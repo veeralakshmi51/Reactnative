@@ -6,9 +6,9 @@ import {
   TouchableOpacity,
   Image,
   StatusBar,
-  Modal,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Modal from 'react-native-modal';
 const Header = ({title, icon, navigation}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -30,7 +30,7 @@ const Header = ({title, icon, navigation}) => {
         <Text
           style={{
             fontSize: 25,
-            marginLeft: '10%',
+            marginLeft: '20%',
             fontWeight: '700',
             color: '#FFF',
           }}>
@@ -43,38 +43,45 @@ const Header = ({title, icon, navigation}) => {
       </TouchableOpacity>
 
       <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={closeModal}
-        >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-          <TouchableOpacity onPress={closeModal}>
+        animationInTiming={500}
+        animationIn="fadeIn"
+        isVisible={modalVisible}
+        onBackButtonPress={closeModal}
+        style={{
+          margin: 0,
+          justifyContent: 'flex-start',
+          alignItems: 'flex-end',
+          
+        }}>
+        <View style={styles.modalContent}>
+          {/* <TouchableOpacity onPress={closeModal}>
             <Icon name='close-circle-outline' size={20} color='black' style={{textAlign:'right'}}/>
+          </TouchableOpacity> */}
+          <TouchableOpacity
+            style={styles.modalOption}
+            onPress={() => {
+              console.log('Add Device clicked');
+              addDevice();
+              closeModal();
+            }}>
+            <Text style={styles.modalText}>Connect Via Bluetooth</Text>
           </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.modalOption}
-              onPress={() => {
-                console.log('Add Device clicked');
-                addDevice();
-                closeModal();
-              }}>
-              <Text style={styles.modalText}>Connect Via Bluetooth</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.modalOption}
-              onPress={() => {
-                console.log('Scanner clicked');
-                navigation.navigate('ScannedList')
-                closeModal();
-              }}>
-              <Text style={styles.modalText}>Device List</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.modalOption} onPress={closeModal}>
-              <Text style={styles.modalText}>Cancel</Text>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            style={styles.modalOption}
+            onPress={() => {
+              console.log('Scanner clicked');
+              navigation.navigate('ScannedList');
+              closeModal();
+            }}>
+            <Text style={styles.modalText}>Device List</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.modalOption,{backgroundColor:'tomato',borderRadius:20,width:80,alignSelf:'center'}]}
+            onPress={() => {
+              closeModal();
+            }}>
+            <Text style={styles.modalText}>close</Text>
+          </TouchableOpacity>
         </View>
       </Modal>
     </View>
@@ -104,24 +111,20 @@ const styles = StyleSheet.create({
     width: 30,
     borderRadius: 15,
   },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-  },
+
   modalContent: {
-    width: 250,
-    padding: 20,
-    backgroundColor: 'white',
+    width: 200,
+    backgroundColor: '#1a1a1a',
     borderRadius: 10,
+    marginTop: 40,
+    height:150
   },
   modalOption: {
     paddingVertical: 10,
+    paddingHorizontal: 20,
   },
   modalText: {
     fontSize: 18,
-    color: 'black',
-    textAlign: 'center',
+    color: '#f5f5f5',
   },
 });

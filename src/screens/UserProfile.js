@@ -7,7 +7,7 @@ import {
   View,
   Image,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import Header from './Header';
 import Feedback from 'react-native-vector-icons/MaterialIcons';
 import DeviceIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -16,7 +16,8 @@ import Locked from 'react-native-vector-icons/Fontisto';
 import Versions from 'react-native-vector-icons/Octicons';
 import About from 'react-native-vector-icons/AntDesign';
 const userIcon = require('../images/account.png');
-import { Divider } from '@rneui/themed';
+import {Divider} from '@rneui/themed';
+import {UserContext} from '../Context/UserContext';
 const UserProfile = ({navigation}) => {
   const [userProfileDetails, setUserProfileDetails] = useState([
     'Feedback',
@@ -26,6 +27,7 @@ const UserProfile = ({navigation}) => {
     'Version',
     'About this app',
   ]);
+  const {userInfo, setUserInfo} = useContext(UserContext);
   const icons = {
     Feedback: (
       <Feedback
@@ -123,9 +125,9 @@ const UserProfile = ({navigation}) => {
     Alert.alert(`Choosed ${item}`);
   };
 
-  const handleSignin=()=>{
-    navigation.navigate('Login')
-  }
+  const handleProfileDetails = () => {
+    navigation.navigate('ProfileDetails');
+  };
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity onPress={() => handlePermission(item)}>
@@ -136,30 +138,51 @@ const UserProfile = ({navigation}) => {
       </TouchableOpacity>
     );
   };
+
+  if (userInfo) {
+    console.log('User', userInfo.user.name);
+    console.log('User', userInfo.user.email);
+    console.log('User', userInfo.user.photo);
+    console.log('User', userInfo.user.id);
+  } else {
+    console.log('user not signed yet');
+  }
   return (
     <View style={{flex: 1, backgroundColor: 'black'}}>
-      <Header title="Profile" icon={require('../images/plus.png')} navigation={navigation}/>
+      <Header
+        title="Profile"
+        icon={require('../images/plus.png')}
+        navigation={navigation}
+      />
       <View style={{backgroundColor: '#1A1A1A', borderRadius: 20, margin: 10}}>
-        <View style={{margin:10}}>
-          <TouchableOpacity onPress={handleSignin}>
-            <View style={{flexDirection:'row'}}>
-              <Image
-                source={userIcon}
-                tintColor="grey"
-                style={{height: 50, width: 50}}
-              />
-              <View style={{margin:10}}>
-              <Text style={{color: 'white', fontSize: 18, fontWeight: '500'}}>
-                Not Signed In
-              </Text>
-              <Text style={{color: 'grey', fontSize: 12, fontWeight: '400'}}>
-                Gender | Height | Age
-              </Text>
+        <View style={{margin: 10}}>
+          <TouchableOpacity onPress={handleProfileDetails}>
+            <View style={{flexDirection: 'row'}}>
+              {userInfo ? (
+                <Image
+                  source={{uri: userInfo.user.photo}}
+                  style={{height: 50, width: 50,borderRadius:50}}
+                />
+              ) : (
+                <Image
+                  source={userIcon}
+                  tintColor="grey"
+                  style={{height: 50, width: 50}}
+                />
+              )}
+
+              <View style={{margin: 10}}>
+                <Text style={{color: 'white', fontSize: 18, fontWeight: '500'}}>
+                  {userInfo ? userInfo.user.name : 'Not Signed In'}
+                </Text>
+                <Text style={{color: 'grey', fontSize: 15, fontWeight: '400'}}>
+                  {userInfo ? userInfo.user.id : 'Gender | Height | Age'}
+                </Text>
               </View>
             </View>
           </TouchableOpacity>
         </View>
-        <Divider/>
+        <Divider />
         <FlatList
           data={userProfileDetails}
           renderItem={renderItem}

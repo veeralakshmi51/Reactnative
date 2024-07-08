@@ -17,15 +17,13 @@ export const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 24,
-    marginBottom: 10,
-    marginTop: 20,
   },
   scanButton: {
     backgroundColor: 'tomato',
     padding: 10,
     borderRadius: 20,
     borderWidth:2,
-    margin:20,
+    margin:'15%',
     borderColor:'white'
   },
   scanButtonText: {

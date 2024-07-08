@@ -6,26 +6,20 @@ import Modal from 'react-native-modal';
 const Devices = ({navigation}) => {
  const [visible,setVisible]=useState(false);
  const[visible1,setVisible1]=useState(false);
- const [visible2,setVisible2]=useState(false);
  const handleExit=()=>{
   setVisible(false)
  }
  const handleExit1=()=>{
   setVisible1(false)
  }
- const handleExit2=()=>{
-  setVisible2(false);
- }
+
  const handleAgree=()=>{
   setVisible(false)
   setVisible1(true)
  }
- const handleAgree1=()=>{
-  setVisible1(false)
-  setVisible2(true)
- }
+ 
  const handleDevice=()=>{
-  setVisible2(false)
+  setVisible1(false)
   navigation.navigate('BluetoothManager')
  }
   return (
@@ -193,7 +187,7 @@ const Devices = ({navigation}) => {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}
-                onPress={handleAgree1}>
+                onPress={handleDevice}>
                 <Text style={{color: 'white', fontSize: 20, fontWeight: '600'}}>
                   Agree
                 </Text>
@@ -202,84 +196,7 @@ const Devices = ({navigation}) => {
           </View>
         </View>
       </Modal>
-      <Modal
-        animationInTiming={500}
-        animationIn="slideInUp"
-        isVisible={visible2}
-        onBackButtonPress={() => setVisible2(false)}
-        style={{width: '100%', marginBottom: 0, marginLeft: 0}}>
-        <View
-          style={{
-            backgroundColor: '#1a1a1a',
-            position: 'absolute',
-            bottom: 0,
-            height: 200,
-            width: '100%',
-            left: 0,
-            right: 0,
-          }}>
-          <View>
-            <Text
-              style={{
-                color: 'white',
-                fontSize: 20,
-                fontWeight: '500',
-                textAlign: 'center',
-                marginTop: 20,
-              }}>
-              Transfer Via Bluetooth
-            </Text>
-            <Text
-              style={{
-                color: '#f5f5f5',
-                fontSize: 18,
-                fontWeight: '500',
-                textAlign: 'start',
-                marginTop: 20,
-                marginLeft: 20,
-              }}>
-              This app needs to transfer data from your device via Bluetkooth.
-              Allow now?
-            </Text>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-around',
-                margin: 40,
-              }}>
-              <TouchableOpacity
-                style={{
-                  width: '45%',
-                  backgroundColor: 'grey',
-                  height: 40,
-                  borderRadius: 20,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-                onPress={handleExit2}>
-                <Text
-                  style={{color: '#f5f5f5', fontWeight: '600', fontSize: 20}}>
-                  Deny
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={handleDevice}
-                style={{
-                  width: '45%',
-                  backgroundColor: 'tomato',
-                  height: 40,
-                  borderRadius: 20,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Text style={{color: 'white', fontSize: 20, fontWeight: '600'}}>
-                  Agree
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
+     
     </View>
   );
 };

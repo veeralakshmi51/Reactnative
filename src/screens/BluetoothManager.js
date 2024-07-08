@@ -17,11 +17,12 @@ import BleManager from 'react-native-ble-manager';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {styles} from '../styles/styles';
 import {DeviceList} from './DeviceList';
-import { ScrollView } from 'react-native-virtualized-view';
+import {ScrollView} from 'react-native-virtualized-view';
+import Icon from 'react-native-vector-icons/Ionicons';
 const BleManagerModule = NativeModules.BleManager;
 const BleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
-const BluetoothManager = () => {
+const BluetoothManager = ({navigation}) => {
   const peripherals = new Map();
   const [isScanning, setIsScanning] = useState(false);
   const [connectedDevices, setConnectedDevices] = useState([]);
@@ -131,13 +132,37 @@ const BluetoothManager = () => {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  const goback = () => {
+    console.log(('click'));
+    navigation.goBack(); 
+  };
   return (
     <SafeAreaView style={[backgroundStyle, styles.container]}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <View style={{pdadingHorizontal: 20}}>
+      <View style={{paddingHorizontal: 10, marginTop: 20}}>
+          <TouchableOpacity onPress={goback}>
+          <Icon
+            name="arrow-back"
+            color="black"
+            style={{
+              top: 10,
+              position: 'absolute',
+              backgroundColor: 'white',
+              height: 40,
+              width: 40,
+              paddingHorizontal: 10,
+              paddingVertical: 10,
+              borderTopRightRadius: 10,
+              borderBottomLeftRadius: 10,
+              marginLeft:12
+            }}
+            size={20}
+          />
+          </TouchableOpacity>
         <Text
           style={[
             styles.title,
@@ -145,6 +170,7 @@ const BluetoothManager = () => {
           ]}>
           All Devices
         </Text>
+
         <TouchableOpacity
           activeOpacity={0.5}
           style={styles.scanButton}
@@ -154,53 +180,52 @@ const BluetoothManager = () => {
           </Text>
         </TouchableOpacity>
         <ScrollView>
-        <Text
-          style={[
-            styles.subtitle,
-            {color: isDarkMode ? Colors.white : Colors.black},
-          ]}>
-          Discovered Devices:
-        </Text>
-        {discoveredDevices.length > 0 ? (
-          <FlatList
-            data={discoveredDevices}
-            renderItem={({item}) => (
-              <DeviceList
-                peripheral={item}
-                connect={connectToPeripheral}
-                disconnect={disconnectFromPeripheral}
-              />
-            )}
-            keyExtractor={item => item.id}
-          />
-        ) : (
-          <Text style={styles.noDevicesText}>No Bluetooth devices found</Text>
-        )}
-        <Text
-          style={[
-            styles.subtitle,
-            {color: isDarkMode ? Colors.white : Colors.black},
-          ]}>
-          Connected Devices:
-        </Text>
-        {connectedDevices.length > 0 ? (
-          <FlatList
-            data={connectedDevices}
-            renderItem={({item}) => (
-              <DeviceList
-                peripheral={item}
-                connect={connectToPeripheral}
-                disconnect={disconnectFromPeripheral}
-              />
-            )}
-            keyExtractor={item => item.id}
-          />
-        ) : (
-          <Text style={styles.noDevicesText}>No connected devices</Text>
-        )}
+          <Text
+            style={[
+              styles.subtitle,
+              {color: isDarkMode ? Colors.white : Colors.black},
+            ]}>
+            Discovered Devices:
+          </Text>
+          {discoveredDevices.length > 0 ? (
+            <FlatList
+              data={discoveredDevices}
+              renderItem={({item}) => (
+                <DeviceList
+                  peripheral={item}
+                  connect={connectToPeripheral}
+                  disconnect={disconnectFromPeripheral}
+                />
+              )}
+              keyExtractor={item => item.id}
+            />
+          ) : (
+            <Text style={styles.noDevicesText}>No Bluetooth devices found</Text>
+          )}
+          <Text
+            style={[
+              styles.subtitle,
+              {color: isDarkMode ? Colors.white : Colors.black},
+            ]}>
+            Connected Devices:
+          </Text>
+          {connectedDevices.length > 0 ? (
+            <FlatList
+              data={connectedDevices}
+              renderItem={({item}) => (
+                <DeviceList
+                  peripheral={item}
+                  connect={connectToPeripheral}
+                  disconnect={disconnectFromPeripheral}
+                />
+              )}
+              keyExtractor={item => item.id}
+            />
+          ) : (
+            <Text style={styles.noDevicesText}>No connected devices</Text>
+          )}
         </ScrollView>
       </View>
-      
     </SafeAreaView>
   );
 };
